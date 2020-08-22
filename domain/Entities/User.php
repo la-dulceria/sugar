@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Domain\Entities;
 
+use Domain\Enums\UserRoles;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -36,4 +38,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    private int $id;
+    private string $name;
+    private string $email;
+    private int $role;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getRole(): int
+    {
+        return $this->role;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRoles::ADMIN;
+    }
 }
