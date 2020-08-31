@@ -8,7 +8,6 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
 class HerePort
@@ -30,8 +29,7 @@ class HerePort
 
     public function findSequence(
         string $start,
-        array $waypoints,
-        string $end
+        array $waypoints
     ): ?array
     {
         $url = self::BASE_URL . 'findsequence.json?start=' . $start;
@@ -40,7 +38,7 @@ class HerePort
             $url .= '&destination' . ($key + 1) . '=' . $waypoint;
         }
 
-        $url .= '&end=' . $end;
+        $url .= '&end=' . $start;
 
         $url .= '&mode=fastest;car&apiKey=' . $this->apiKey;
 
@@ -49,8 +47,6 @@ class HerePort
 
             return $this->deserializeResponse($response, true);
         } catch (RequestException $exception) {
-            dd($exception);
-
             return null;
         }
     }

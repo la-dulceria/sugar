@@ -29,6 +29,6 @@ class HerePortTest extends TestCase
             'FIN;-31.419209, -62.084702'
         );
 
-        dd($result);
+        $this->assertNotEmpty($result);
     }
 }
