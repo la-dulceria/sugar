@@ -237,15 +237,48 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'submenu' => [
                 [
-                    'text' => 'Listado',
-                    'url'  => 'admin/categories',
+                    'text' => 'Crear nueva',
+                    'url'  => 'admin/categories/new',
+                    'icon' => 'fas fa-external-link-alt'
+
                 ],
                 [
-                    'text' => 'Crear nueva',
-                    'url'  => 'admin/categories/create',
+                    'text' => 'Listado',
+                    'url'  => 'admin/categories/index',
+                    'icon' => 'fas fa-list-ul'
                 ],
+
+
+
             ],
+
         ],
+        [
+            'text' => 'Productos',
+            'icon' => 'fas fa-fw fa-user',
+
+            'submenu' => [
+                [
+                    'text' => 'Crear nuevo',
+                    'url'  => 'admin/products/new',
+                    'icon' => 'fas fa-external-link-alt',
+                    'icon_color' => 'red'
+
+                ],
+                [
+                    'text' => 'Listado',
+                    'url'  => 'admin/products/index',
+                    'icon' => 'fas fa-list-ul',
+                    'icon_color' => 'yellow'
+                ],
+
+
+
+            ],
+
+
+        ],
+
 //        [
 //            'text' => 'search',
 //            'search' => true,
