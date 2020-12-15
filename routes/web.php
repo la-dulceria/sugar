@@ -40,3 +40,17 @@ Route::get('admin/autoComplete','ProductController@autoComplete')
     ->name('ProductController@autoComplete');
 Route::get('admin/findProducts','ProductController@findProduct')
     ->name('ProductController@findProduct');
+
+/*Delivery*/
+Route::get('admin/deliveries/new','DeliveryController@new')
+    ->name('DeliveryController@new');
+Route::post('admin/deliveries/create','DeliveryController@create')
+->name('DeliveryController@create');
+Route::get('admin/deliveries/index','DeliveryController@index')
+->name('DeliveryController@index');
+Route::get('admin/deliveries/delete{id}','DeliveryController@delete')
+->name('DeliveryController@delete');
+Route::get('admin/deliveries/edit{id}','DeliveryController@edit')
+->name('DeliveryController@edit');
+Route::put('admin/deliveries/update{id}','DeliveryController@update')
+->name('DeliveryController@update');

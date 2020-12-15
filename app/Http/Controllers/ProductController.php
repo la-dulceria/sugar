@@ -25,7 +25,8 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required|numeric'
+            'price' => 'required|numeric',
+            'category_id' => 'required',
         ]);
 
         $service->create(
@@ -72,7 +73,7 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
-            'category_id'=>'required'
+            'category_id' => 'required',
         ]);
 
         $service->edit(
@@ -93,7 +94,7 @@ class ProductController extends Controller
     public function autoComplete(Request $request, ProductRepository $productRepository)
     {
         $product = Product::select("name")
-            ->where('name','like',"%{$request->terms}%")
+            ->where('name', 'like', "%{$request->terms}%")
             ->get();
 
         return response()->json($product);
@@ -104,7 +105,7 @@ class ProductController extends Controller
     {
         $find = $request->input('find');
 
-        return view('admin/products/index', ['products'=> $productRepository->where($find)]);
+        return view('admin/products/index', ['products' => $productRepository->where($find)]);
 
     }
 

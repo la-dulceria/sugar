@@ -234,7 +234,8 @@ return [
         ['header' => 'Administración'],
         [
             'text' => 'Categorías',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-clipboard',
+            'icon_color' => 'yellow',
             'submenu' => [
                 [
                     'text' => 'Crear nueva',
@@ -255,7 +256,8 @@ return [
         ],
         [
             'text' => 'Productos',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-candy-cane',
+            'icon_color' => 'red',
 
             'submenu' => [
                 [
@@ -268,6 +270,32 @@ return [
                 [
                     'text' => 'Listado',
                     'url'  => 'admin/products/index',
+                    'icon' => 'fas fa-list-ul',
+                    'icon_color' => 'yellow'
+                ],
+
+
+
+            ],
+
+
+        ],
+        [
+            'text' => 'Envios',
+            'icon' => 'fas fa-truck',
+            'icon_color' => 'green',
+
+            'submenu' => [
+                [
+                    'text' => 'Crear nuevo',
+                    'url'  => 'admin/deliveries/new',
+                    'icon' => 'fas fa-external-link-alt',
+                    'icon_color' => 'red'
+
+                ],
+                [
+                    'text' => 'Listado',
+                    'url'  => 'admin/deliveries/index',
                     'icon' => 'fas fa-list-ul',
                     'icon_color' => 'yellow'
                 ],

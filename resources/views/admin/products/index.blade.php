@@ -43,14 +43,18 @@
         </style>
 
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-              crossorigin="anonymous">
+
     </head>
     <body>
 
     @include('message')
-
+    <form action="{{route('ProductController@findProduct' )}}" >
+        <div class="input-group">
+            <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
+            <input class="form-control typeahead" id="system-search"
+                   name="find" placeholder="Buscar">
+            <button class="btn-primary"  ><i class="fas fa-search"></i>
+        </div>
     <table id="customers">
         <thead class="thead-dark">
         <tr>
@@ -77,15 +81,16 @@
         </tr>
         </thead>
         <tr>
+
             @foreach($products as $product)
                 <td>{{$product->name}}</td>
                 <td>{{$product->description}}</td>
                 <td>{{$product->price}}</td>
                 <td>{{$product->category->name}}</td>
                 <td>
-                    <a class="btn btn-danger" onclick="return myFunction();"
-                       href="{{route('ProductController@delete', $product->getId())}} ">
-                        <i class="fa fa-trash"></i></a>
+                    <a class="btn btn-danger" onclick="return ConfirmDelete();"
+                       href="{{route('ProductController@delete', $product->getId())}} "
+                       ><i class="fa fa-trash"></i></a>
                     <a class="btn btn-success" href="{{route('ProductController@edit',['id' => $product->getId()])}}">
                         <i class="fas fa-edit"></i>
                     </a>
@@ -117,6 +122,17 @@
                 })
             }
         });
+
+        function ConfirmDelete()
+        {
+            var x = confirm("Seguro que desea borrar el producto?");
+            if (x)
+                return true;
+            else
+                return false;
+        }
+
+
     </script>
 
     </body>
