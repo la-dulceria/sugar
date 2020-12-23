@@ -53,7 +53,7 @@
 @include('message')
 @include('errors')
 
-<form action="{{route('ProductController@update',['id'=>$products->getId()])}}" method="POST">
+<form action="{{route('ProductController@update', ['id'=>$products->getId()])}}" method="POST">
     @method('PUT')
     @csrf
 
@@ -70,7 +70,7 @@
     <select class="form-control select2-container input-lg step2-select" style="width: 50%" id="select2"
             name="category_id">
         <option disabled selected>Seleccione una categoria</option>
-        @foreach( $categorys as $category)
+        @foreach($categories as $category)
             <option value="{{ $category->getId() }}"
                 {{$category->id === $products->category->id ? "selected" : "" }}> {{ $category->getName() }}</option>
         @endforeach

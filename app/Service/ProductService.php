@@ -7,20 +7,12 @@ namespace App\Service;
 use App\Product;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
-;
-
 
 class ProductService
 {
-
     private CategoryRepository $categoryRepository;
     private ProductRepository $productRepository;
 
-    /**
-     * ProductService constructor.
-     * @param CategoryRepository $categoryRepository
-     * @param ProductRepository $productRepository
-     */
     public function __construct(CategoryRepository $categoryRepository, ProductRepository $productRepository)
     {
         $this->categoryRepository = $categoryRepository;
@@ -34,8 +26,8 @@ class ProductService
         $product->setDescription($description);
         $product->setPrice($price);
 
-       $this->categoryRepository->findOrfail($category_id);
-       $product->category()->associate($category_id);
+       $category = $this->categoryRepository->findOrfail($category_id);
+       $product->category()->associate($category);
 
        $this->productRepository->save($product);
     }
@@ -48,16 +40,18 @@ class ProductService
     }
 
     public function edit (string $id, string $name, string $description,
-                          float $price, string $category_id)
+                          float $price, string $categoryId)
     {
         $product = $this->productRepository->findOrfail($id);
+
 
         $product->setName($name);
         $product->setDescription($description);
         $product->setPrice($price);
 
-        $this->categoryRepository->findOrfail($id);
-        $product->category()->associate($category_id);
+        $category = $this->categoryRepository->findOrfail($categoryId);
+
+        $product->category()->associate($category);
 
         $this->productRepository->save($product);
     }

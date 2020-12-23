@@ -38,63 +38,57 @@
             }
         </style>
 
+    <div class="row" style="padding: 10px"  >
+        <div class="col-md-12"></div>
+        <form class="form" action="{{route('ProductController@findProduct' )}}" >
+            <div class="input-group">
+                <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
+                <input class="form-control typeahead" id="system-search"
+                       name="find" placeholder="Buscar">
+                <button class="btn-primary"  ><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                @include('message')
 
 
-    </head>
-    <body>
+                <table id="customers">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">
+                        </th>
+                    </tr>
+                    </thead>
+                    <tr>
 
-    @include('message')
-    <form action="{{route('ProductController@findProduct' )}}" >
-        <div class="input-group">
-            <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
-            <input class="form-control typeahead" id="system-search"
-                   name="find" placeholder="Buscar">
-            <button class="btn-primary"  ><i class="fas fa-search"></i>
+                        @foreach($products as $product)
+                            <td>{{$product->name}}</td>
+                            <td>{{$product->description}}</td>
+                            <td>{{$product->price}}</td>
+                            <td>{{$product->category->name}}</td>
+                            <td>
+                                <a class="btn btn-danger" onclick="return ConfirmDelete();"
+                                   href="{{route('ProductController@delete', $product->getId())}} "
+                                ><i class="fa fa-trash"></i></a>
+                                <a class="btn btn-success" href="{{route('ProductController@edit',['id' => $product->getId()])}}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+
+                    </tr>
+                    @endforeach
+                </table>
+
+            </div>
         </div>
-    <table id="customers">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Categoria</th>
-            <th scope="col">
-                <div >
-                    <div class="row">
-                        <div class="col-md-3">
-                            <form action="{{route('ProductController@findProduct' )}}" >
-                                <div class="input-group">
-                                    <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
-                                    <input class="form-control typeahead" id="system-search"
-                                           name="find" placeholder="Buscar">
-                                    <button class="btn-primary"  ><i class="fas fa-search"></i>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </th>
-        </tr>
-        </thead>
-        <tr>
-
-            @foreach($products as $product)
-                <td>{{$product->name}}</td>
-                <td>{{$product->description}}</td>
-                <td>{{$product->price}}</td>
-                <td>{{$product->category->name}}</td>
-                <td>
-                    <a class="btn btn-danger" onclick="return ConfirmDelete();"
-                       href="{{route('ProductController@delete', $product->getId())}} "
-                       ><i class="fa fa-trash"></i></a>
-                    <a class="btn btn-success" href="{{route('ProductController@edit',['id' => $product->getId()])}}">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                </td>
-
-        </tr>
-        @endforeach
-    </table>
 
 
 

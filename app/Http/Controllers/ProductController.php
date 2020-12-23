@@ -13,11 +13,10 @@ class ProductController extends Controller
     public function new(CategoryRepository $categoryRepository)
     {
         return view('admin/products/new', [
-            'categorys' => $categoryRepository->all()]);
+            'categories' => $categoryRepository->all()]);
     }
 
-    public function create(Request $request, ProductService $service,
-                           CategoryRepository $categoryRepository)
+    public function create(Request $request, ProductService $service)
     {
         $request->validate([
             'name' => 'required',
@@ -33,10 +32,9 @@ class ProductController extends Controller
             $request->input('category_id')
         );
 
-        $request->session()->flash('alert-success', 'Producto cread con exito');
+        $request->session()->flash('alert-success', 'Producto creado con exito');
 
-        return view('admin/products/new', [
-            'categorys' => $categoryRepository->all()]);
+        return back();
     }
 
     public function index(ProductRepository $productRepository)
@@ -45,26 +43,23 @@ class ProductController extends Controller
             'products' => $productRepository->all()]);
     }
 
-    public function delete($id, ProductService $service,
-                           ProductRepository $productRepository)
+    public function delete($id, ProductService $service)
     {
         $service->delete($id);
 
-        return view('admin/products/index', [
-            'products' => $productRepository->all()]);
+        return back();
     }
 
     public function edit(CategoryRepository $categoryRepository,
                          ProductRepository $productRepository, string $id)
     {
         return view('admin/products/edit', [
-            'categorys' => $categoryRepository->all(),
+            'categories' => $categoryRepository->all(),
             'products' => $productRepository->findOrfail($id)
         ]);
     }
 
-    public function update(string $id, Request $request,
-                           ProductService $service, ProductRepository $productRepository)
+    public function updateProduct(string $id, Request $request, ProductService $service)
     {
         $request->validate([
             'name' => 'required',
@@ -79,16 +74,15 @@ class ProductController extends Controller
             $request->input('description'),
             $request->input('price'),
             $request->input('category_id')
-
         );
 
         $request->session()->flash('alert-success', 'Producto editado');
 
-        return view('admin/products/index', [
-            'products' => $productRepository->all()]);
+        return redirect('admin/products/index');
     }
 
-    public function autoComplete(Request $request, ProductRepository $productRepository)
+
+    public function autoComplete(Request $request)
     {
         $product = Product::select("name")
             ->where('name', 'like', "%{$request->terms}%")
@@ -105,5 +99,4 @@ class ProductController extends Controller
         return view('admin/products/index', ['products' => $productRepository->where($find)]);
 
     }
-
 }

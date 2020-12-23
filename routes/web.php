@@ -35,9 +35,9 @@ Route::middleware([\App\Http\Middleware\AdminMiddleware::class])->group(function
         ->name('ProductController@index');
     Route::get('admin/products/delete/{id}', 'ProductController@delete')
         ->name('ProductController@delete');
-    Route::get('admin/products/edit/{id}', 'ProductController@edit')
+    Route::get('/admin/products/edit/{id}', 'ProductController@edit')
         ->name('ProductController@edit');
-    Route::put('admin/products/update/{id}', 'ProductController@update')
+    Route::put('admin/products/update/{id}', 'ProductController@updateProduct')
         ->name('ProductController@update');
     Route::get('admin/autoComplete', 'ProductController@autoComplete')
         ->name('ProductController@autoComplete');

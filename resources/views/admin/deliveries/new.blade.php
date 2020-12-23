@@ -55,7 +55,8 @@
 <label for="name">Fecha de entrega</label>
 <input type="date" name="date" placeholder="Elija la fecha del envio" value="{{ date('Y-m-d') }}">
 <br><br>
-<button class="btn btn-primary btn-block" type="sumbit">Cargar envio</button>
+    <input type="submit" value="Cargar envio">
+
 </form>
 
 

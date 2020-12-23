@@ -6,7 +6,8 @@
     <h1>Productos</h1>
 @stop
 
-@section('css')
+
+@section('content')
     <style>
         input[type=text], select {
             width: 100%;
@@ -40,9 +41,7 @@
         }
 
     </style>
-@stop
 
-@section('content')
     <p>Nuevo Producto</p>
 
 @include('message')
@@ -60,16 +59,15 @@
 <label for="name">Precio por cada 100 gramos</label>
 <input type="text" name="price" placeholder="Ingrese el precio del producto">
 <label for="name">Categorias</label>
-<div>
-    <select class="form-control select2-container input-lg step2-select" style="width: 50%" id="select2" name="category_id">
-        <option disabled selected>Seleccione una categoria</option>
-        @foreach( $categorys as $category)
-            <option value="{{ $category->getId() }}"> {{ $category->getName() }}</option>
-        @endforeach
-    </select>
+<select class="form-control select2-container input-lg step2-select" style="width: 50%" id="select2" name="category_id">
+    <option disabled selected>Seleccione una categoria</option>
+    @foreach($categories as $category)
+        <option value="{{ $category->getId() }}"> {{ $category->getName() }}</option>
+    @endforeach
+</select>
 
-    <button class="btn btn-primary btn-block" type="sumbit">Crear Producto</button>
-</div>
+<input type="submit" value="Crear producto">
+
 </form>
 
 <script type="text/javascript">
