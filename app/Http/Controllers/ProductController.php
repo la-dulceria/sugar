@@ -37,6 +37,17 @@ class ProductController extends Controller
         return back();
     }
 
+    public function info($id, ProductRepository $productRepository)
+    {
+        $product = $productRepository->findOrfail($id);
+
+        return [
+            'id' => $product->getId(),
+            'name' => $product->getName(),
+            'price' => $product->getPrice(),
+        ];
+    }
+
     public function index(ProductRepository $productRepository)
     {
         return view('admin/products/index', [

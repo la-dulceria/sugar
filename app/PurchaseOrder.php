@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class PurchaseOrder extends Model
 {
-    public function product()
+    public function products()
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->belongsToMany(Product::class, 'purchase_order_products', 'purchase_order_id', 'product_id');
     }
 
     /**
@@ -67,9 +67,6 @@ class PurchaseOrder extends Model
 
     public function delivery()
     {
-        return $this->hasMany(Delivery::class,'delivery_id');
+        return $this->hasOne(Delivery::class,'delivery_id');
     }
-
-
-
 }

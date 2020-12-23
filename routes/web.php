@@ -43,6 +43,8 @@ Route::middleware([\App\Http\Middleware\AdminMiddleware::class])->group(function
         ->name('ProductController@autoComplete');
     Route::get('admin/findProducts', 'ProductController@findProduct')
         ->name('ProductController@findProduct');
+    Route::get('admin/products/info/{id}', 'ProductController@info')
+        ->name('ProductController@info');
 
     /*Delivery*/
     Route::get('admin/deliveries/new', 'DeliveryController@new')
