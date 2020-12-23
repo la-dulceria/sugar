@@ -36,7 +36,7 @@ class Delivery extends Model
      */
     public function getDate():DateTime
     {
-        return $this->date;
+        return new DateTime($this->date);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repository\DeliveryRepository;
 use App\Service\DeliveryService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class DeliveryController extends Controller
 {
@@ -24,9 +25,10 @@ class DeliveryController extends Controller
             $request->input('name'),
             $request->input('date')
         );
+
         $request->session()->flash('alert-success', 'Envio creado con exito');
 
-        return view('admin/deliveries/new');
+        return back();
     }
 
     public function index(DeliveryRepository $deliveryRepository)
@@ -36,11 +38,19 @@ class DeliveryController extends Controller
     }
 
     public function delete($id, DeliveryRepository $deliveryRepository,
-                           DeliveryService $service)
+                           DeliveryService $service,
+                        Request $request)
     {
-        $service->delete($id);
-        return view('admin/deliveries/index', [
-            'deliveries' => $deliveryRepository->all()]);
+        try {
+            $service->delete($id);
+        } catch (ValidationException $exception) {
+            $request->session()->flash('alert-danger', 'No se ha podido eliminar el envio, verifique que no exista ordenes de compra con este envio asignado.');
+            return back();
+        }
+
+        $request->session()->flash('alert-success', 'Envio eliminado con exito');
+
+        return back();
     }
 
     public function edit($id, DeliveryRepository $deliveryRepository)
@@ -51,7 +61,7 @@ class DeliveryController extends Controller
 
     public function update(Request $request, $id,
                            DeliveryService $service,
-                            DeliveryRepository $deliveryRepository)
+                           DeliveryRepository $deliveryRepository)
     {
         $request->validate([
             'name' => 'required',
@@ -64,8 +74,9 @@ class DeliveryController extends Controller
             $request->input('date')
         );
 
-        return view('admin/deliveries/index', [
-            'deliveries' => $deliveryRepository->all()]);
+        $request->session()->flash('alert-success', 'Envio editado con exito');
 
+
+        return redirect('admin/deliveries/index');
     }
 }

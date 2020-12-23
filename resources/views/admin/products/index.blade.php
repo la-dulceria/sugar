@@ -7,10 +7,6 @@
 @stop
 
 @section('content')
-    <p>Lista</p>
-    <!DOCTYPE html>
-    <html>
-    <head>
         <style>
             #customers {
                 font-family: Arial, Helvetica, sans-serif;
@@ -135,6 +131,5 @@
 
     </script>
 
-    </body>
 @stop
 

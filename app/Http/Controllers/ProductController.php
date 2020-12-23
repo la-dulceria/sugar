@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Repository\CategoryRepository;
-
-
 use App\Repository\ProductRepository;
-use App\Service\CategoryService;
 use App\Service\ProductService;
 use Illuminate\Http\Request;
 

@@ -27,4 +27,5 @@ class CategoryRepository
     {
         $category->delete();
     }
+
 }

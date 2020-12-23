@@ -11,7 +11,6 @@
 @section('css')
 @stop
 
-<html>
 <style>
     input[type=text], select {
         width: 100%;
@@ -44,7 +43,7 @@
         padding: 20px;
     }
 </style>
-<body>
+
 
 @include('message')
 @include('errors')
@@ -57,9 +56,5 @@
             value="{{$category->getName()}}">
     <input type="submit" value="Editar">
 </form>
-
-
-</body>
-</html>
 
 @stop

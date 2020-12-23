@@ -8,9 +8,7 @@
 
 @section('content')
     <p>Lista</p>
-    <!DOCTYPE html>
-    <html>
-    <head>
+
         <style>
             #customers {
                 font-family: Arial, Helvetica, sans-serif;
@@ -42,11 +40,6 @@
             }
         </style>
 
-
-
-    </head>
-    <body>
-
     @include('message')
 
         <table id="customers">
@@ -62,7 +55,7 @@
 
                 @foreach($deliveries as $delivery)
                     <td>{{$delivery->name}}</td>
-                    <td>{{$delivery->date}}</td>
+                    <td>{{$delivery->getDate()->format('d/m/Y')}}</td>
                     <td>
                         <a class="btn btn-danger" onclick="return ConfirmDelete();"
                            href="{{route('DeliveryController@delete', $delivery->getId())}} ">
@@ -89,4 +82,4 @@
         }
     </script>
 
-    @stop
+@stop

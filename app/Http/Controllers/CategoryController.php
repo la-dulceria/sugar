@@ -2,74 +2,88 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Repository\CategoryRepository;
 use App\Service\CategoryService;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class CategoryController extends Controller
 {
+    private CategoryService $service;
+    private CategoryRepository $repository;
+
+    public function __construct(
+        CategoryService $service,
+        CategoryRepository $repository
+    ) {
+        $this->service = $service;
+        $this->repository = $repository;
+    }
 
     public function new()
     {
         return view('admin.categories.new');
     }
 
-    public function create(Request $request, CategoryService $service)
+    public function create(Request $request)
     {
         $request->validate([
             'name' => 'required|max:255'
         ]);
 
-        $service->create(
+        $this->service->create(
             $request->input('name')
         );
 
         $request->session()->flash('alert-success', 'Categoria creada con exito');
 
-        return view('admin.categories.new');
-
+        return back();
     }
 
-    public function index(CategoryRepository $repository)
+    public function index()
     {
-        return view('admin.categories.index', ['category' => $repository->all()]);
+        return view('admin.categories.index', ['category' => $this->repository->all()]);
     }
 
-    public function confirm($id, CategoryRepository $repository, CategoryService $service)
+    public function confirm($id)
     {
-        return view('admin.categories.confirm', ['category' => $repository->findOrfail($id)]);
+        return view('admin.categories.confirm',
+            ['category' => $this->repository->findOrfail($id)]);
     }
 
-    public function delete(Request $request, $id, CategoryService $service, CategoryRepository $repository)
+    public function delete($id, Request $request)
     {
-        $service->delete($id);
+        try {
+            $this->service->delete($id);
+        } catch (ValidationException $exception) {
+            $request->session()->flash('alert-danger', 'No se ha podido eliminar la categoría, verifique que no exista productos cargados con la misma.');
+            return back();
+        }
 
-        $request->session()->flash('alert-success', 'Categoria Eliminada con exito');
+        $request->session()->flash('alert-success', 'Categoria eliminada con exito');
 
-        return view('admin.categories.index', ['category' => $repository->all()]);
+        return back();
     }
 
-    public function edit($id, CategoryRepository $repository)
+    public function edit($id)
     {
-        return view('admin.categories.edit', ['category' => $repository->findOrfail($id)]);
+        return view('admin.categories.edit',
+            ['category' => $this->repository->findOrfail($id)]);
     }
 
-    public function update(string $id, Request $request, CategoryService $service, CategoryRepository $repository)
+    public function update(string $id, Request $request)
     {
         $request->validate([
             'name' => 'required|max:255'
         ]);
 
-        $service->edit(
+        $this->service->edit(
             $id,
             $request->input('name')
         );
 
         $request->session()->flash('alert-success', 'Categoria editada');
 
-        return view('admin.categories.index', ['category' => $repository->all()]);
+        return redirect('admin');
     }
-
 }

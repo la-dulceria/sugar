@@ -9,10 +9,6 @@
 @section('content')
     <p>Editar Envio</p>
 
-@section('css')
-@stop
-
-<html>
 <style>
     input[type=text], select {
         width: 100%;
@@ -45,10 +41,10 @@
         padding: 20px;
     }
 </style>
-<body>
 
 @include('message')
 @include('errors')
+
 <form action="{{route('DeliveryController@update',['id'=>$delivery->getId()])}}" method="POST">
     @method('PUT')
     @csrf
@@ -57,14 +53,10 @@
     <input type="text" name="name" placeholder="Ingrese el nombre"
            value="{{$delivery->getName()}}">
     <label for="name">Fecha de entrega</label>
-    <input type="date" name="date" placeholder="Elija la fecha del envio">
+    <input type="date" name="date" placeholder="Elija la fecha del envio" value="{{ $delivery->getDate()->format('Y-m-d') }}"}}>
     <br><br>
     <input type="submit" value="Editar">
 </form>
-
-
-</body>
-</html>
 
 @stop
 

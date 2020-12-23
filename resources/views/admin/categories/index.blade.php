@@ -25,9 +25,13 @@
                 padding: 8px;
             }
 
-            #customers tr:nth-child(even){background-color: #F4E8E8;}
+            #customers tr:nth-child(even) {
+                background-color: #F4E8E8;
+            }
 
-            #customers tr:hover {background-color: wheat;}
+            #customers tr:hover {
+                background-color: wheat;
+            }
 
             #customers th {
                 padding-top: 12px;
@@ -45,21 +49,32 @@
         <tr>
             <th scope="col">Nombre</th>
             <th scope="col"></th>
-       </tr>
+        </tr>
         </thead>
         <tr>
-        @foreach($category as $item)
-            <td>{{$item->name}}</td>
-            <td><a href="{{route('CategoryController@confirm',
-                ['id' => $item->getId()])}}" class="btn btn-danger ">
-                    <i class="fas fa-trash-alt"></i></a>
-                <a href="{{route('CategoryController@edit',
+            @foreach($category as $item)
+                <td>{{$item->name}}</td>
+                <td><a href="{{route('CategoryController@delete',
+                ['id' => $item->getId()])}}" class="btn btn-danger" onclick="return ConfirmDelete();">
+                        <i class="fas fa-trash-alt"></i></a>
+                    <a href="{{route('CategoryController@edit',
                 ['id' => $item->getId()])}}" class="btn btn-success">
-                    <i class="fas fa-edit"></i>
-                </a>
-            </td>
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
         </tr>
         @endforeach
     </table>
+
+    <script>
+        function ConfirmDelete() {
+            var x = confirm("Seguro que desea borrar el producto?");
+            if (x)
+                return true;
+            else
+                return false;
+        }
+    </script>
+
 @stop
 

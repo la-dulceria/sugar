@@ -8,10 +8,7 @@
 
 @section('content')
     <p>Editar Producto</p>
-@section('css')
-@stop
 
-<html>
 <style>
     input[type=text], select {
         width: 100%;
@@ -52,7 +49,6 @@
     });
 
 </script>
-<body>
 
 @include('message')
 @include('errors')
@@ -80,9 +76,6 @@
         @endforeach
     </select>
     <input type="submit" value="Editar">
-
-
-</body>
-</html>
+</form>
 
 @stop

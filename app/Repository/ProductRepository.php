@@ -4,6 +4,7 @@
 namespace App\Repository;
 
 
+use App\Category;
 use App\Product;
 
 
@@ -32,5 +33,10 @@ class ProductRepository
     public function where ($find)
     {
         return Product::where('name','LIKE' ,"%$find%")->get();
+    }
+
+    public function findByCategory( Category $category)
+    {
+        return Product::where('category_id', '=' , $category->getId())->get();
     }
 }

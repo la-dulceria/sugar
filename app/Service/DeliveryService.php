@@ -6,20 +6,20 @@ namespace App\Service;
 
 use App\Delivery;
 use App\Repository\DeliveryRepository;
+use App\Repository\PurchaseOrderRepository;
 use DateTime;
+use Illuminate\Validation\ValidationException;
 
 
 class DeliveryService
 {
     private DeliveryRepository $deliveryRepository;
+    private PurchaseOrderRepository $purchaseOrderRepository;
 
-    /**
-     * DeliveryService constructor.
-     * @param DeliveryRepository $deliveryRepository
-     */
-    public function __construct(DeliveryRepository $deliveryRepository)
+    public function __construct(DeliveryRepository $deliveryRepository, PurchaseOrderRepository $purchaseOrderRepository)
     {
         $this->deliveryRepository = $deliveryRepository;
+        $this->purchaseOrderRepository = $purchaseOrderRepository;
     }
 
     public function create(string $name, string $date)
@@ -34,6 +34,12 @@ class DeliveryService
     public function delete($id)
     {
         $delivery = $this->deliveryRepository->findOrfail($id);
+
+        $purchaseOrders = $this->purchaseOrderRepository->findByDelivery($delivery);
+        if (!empty($purchaseOrders->toArray())) {
+            throw ValidationException::withMessages(['delivery' => 'No se puede eliminar porque existen ordenes de compra con el envio']);
+        }
+
         $this->deliveryRepository->delete($delivery);
     }
 

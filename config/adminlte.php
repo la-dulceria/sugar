@@ -305,6 +305,34 @@ return [
             ],
 
 
+
+        ],
+        [
+            'text' => 'Orden de compras',
+            'icon' => 'fas fa-cart-plus',
+            'icon_color' => 'blue',
+
+            'submenu' => [
+                [
+                    'text' => 'Nueva orden de compra',
+                    'url'  => 'admin/purchaseOrder/new',
+                    'icon' => 'fas fa-plus-circle',
+                    'icon_color' => 'red'
+
+                ],
+                [
+                    'text' => 'Listado',
+                    'url'  => 'admin/deliveries/index',
+                    'icon' => 'fas fa-list-ul',
+                    'icon_color' => 'yellow'
+                ],
+
+
+
+            ],
+
+
+
         ],
 
 //        [

@@ -8,11 +8,6 @@
 
 @section('content')
     <p>Nuevo Envio</p>
-@section('css')
-@stop
-
-
-<html>
 
 <style>
     input[type=text], select {
@@ -48,8 +43,6 @@
 
 </style>
 
-<body>
-
 @include('message')
 @include('errors')
 
@@ -60,12 +53,10 @@
 <label for="name">Nombre</label>
 <input type="text" name="name" placeholder="Ingrese un nombre ">
 <label for="name">Fecha de entrega</label>
-<input type="date" name="date" placeholder="Elija la fecha del envio">
+<input type="date" name="date" placeholder="Elija la fecha del envio" value="{{ date('Y-m-d') }}">
 <br><br>
 <button class="btn btn-primary btn-block" type="sumbit">Cargar envio</button>
 </form>
-</body>
-</html>
 
 
 @stop
