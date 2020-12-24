@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class PurchaseOrder extends Model
 {
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'purchase_order_products', 'purchase_order_id', 'product_id');
-    }
-
     /**
      * @return float
      */
@@ -62,11 +57,16 @@ class PurchaseOrder extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class,'user_id');
+        return $this->hasOne(User::class);
     }
 
     public function delivery()
     {
-        return $this->hasOne(Delivery::class,'delivery_id');
+        return $this->belongsTo(Delivery::class);
+    }
+
+    public function details()
+    {
+        return $this->hasMany(PurchaseOrderDetail::class, 'purchase_order_id');
     }
 }

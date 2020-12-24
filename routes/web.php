@@ -61,9 +61,12 @@ Route::middleware([\App\Http\Middleware\AdminMiddleware::class])->group(function
         ->name('DeliveryController@update');
 
     /*PurchaseOrder*/
+    Route::get('admin/purchaseOrder/index', 'PurchaseOrderController@index')
+        ->name('PurchaseOrderController@index');
     Route::get('admin/purchaseOrder/new', 'PurchaseOrderController@new')
         ->name('PurchaseOrderController@new');
     Route::post('admin/purchaseOrder/create', 'PurchaseOrderController@create')
         ->name('PurchaseOrderController@create');
-
+    Route::get('admin/purchaseORder/delete/{id}', 'PurchaseOrderController@delete')
+        ->name('PurchaseOrderController@delete');
 });

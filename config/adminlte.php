@@ -46,7 +46,7 @@ return [
     */
 
     'logo' => '<b>La Dulcería</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'images/logo.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -322,12 +322,10 @@ return [
                 ],
                 [
                     'text' => 'Listado',
-                    'url'  => 'admin/deliveries/index',
+                    'url'  => 'admin/purchaseOrder/index',
                     'icon' => 'fas fa-list-ul',
                     'icon_color' => 'yellow'
                 ],
-
-
 
             ],
 
