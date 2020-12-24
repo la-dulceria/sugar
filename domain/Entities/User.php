@@ -42,7 +42,7 @@ class User extends Authenticatable
     private int $id;
     private string $name;
     private string $email;
-    private int $role;
+    private int $role = UserRoles::CLIENT;
 
     public function getId(): int
     {

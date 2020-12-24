@@ -46,7 +46,7 @@ return [
     */
 
     'logo' => '<b>La Dulcería</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'images/logo.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -234,18 +234,105 @@ return [
         ['header' => 'Administración'],
         [
             'text' => 'Categorías',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-clipboard',
+            'icon_color' => 'yellow',
             'submenu' => [
                 [
-                    'text' => 'Listado',
-                    'url'  => 'admin/categories',
+                    'text' => 'Crear nueva',
+                    'url'  => 'admin/categories/new',
+                    'icon' => 'fas fa-external-link-alt'
+
                 ],
                 [
-                    'text' => 'Crear nueva',
-                    'url'  => 'admin/categories/create',
+                    'text' => 'Listado',
+                    'url'  => 'admin/categories/index',
+                    'icon' => 'fas fa-list-ul'
                 ],
+
+
+
             ],
+
         ],
+        [
+            'text' => 'Productos',
+            'icon' => 'fas fa-candy-cane',
+            'icon_color' => 'red',
+
+            'submenu' => [
+                [
+                    'text' => 'Crear nuevo',
+                    'url'  => 'admin/products/new',
+                    'icon' => 'fas fa-external-link-alt',
+                    'icon_color' => 'red'
+
+                ],
+                [
+                    'text' => 'Listado',
+                    'url'  => 'admin/products/index',
+                    'icon' => 'fas fa-list-ul',
+                    'icon_color' => 'yellow'
+                ],
+
+
+
+            ],
+
+
+        ],
+        [
+            'text' => 'Envios',
+            'icon' => 'fas fa-truck',
+            'icon_color' => 'green',
+
+            'submenu' => [
+                [
+                    'text' => 'Crear nuevo',
+                    'url'  => 'admin/deliveries/new',
+                    'icon' => 'fas fa-external-link-alt',
+                    'icon_color' => 'red'
+
+                ],
+                [
+                    'text' => 'Listado',
+                    'url'  => 'admin/deliveries/index',
+                    'icon' => 'fas fa-list-ul',
+                    'icon_color' => 'yellow'
+                ],
+
+
+
+            ],
+
+
+
+        ],
+        [
+            'text' => 'Orden de compras',
+            'icon' => 'fas fa-cart-plus',
+            'icon_color' => 'blue',
+
+            'submenu' => [
+                [
+                    'text' => 'Nueva orden de compra',
+                    'url'  => 'admin/purchaseOrder/new',
+                    'icon' => 'fas fa-plus-circle',
+                    'icon_color' => 'red'
+
+                ],
+                [
+                    'text' => 'Listado',
+                    'url'  => 'admin/purchaseOrder/index',
+                    'icon' => 'fas fa-list-ul',
+                    'icon_color' => 'yellow'
+                ],
+
+            ],
+
+
+
+        ],
+
 //        [
 //            'text' => 'search',
 //            'search' => true,

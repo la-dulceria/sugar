@@ -1,10 +1,10 @@
 <?php
-declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
 use Closure;
 use Domain\Entities\User;
+use Domain\Enums\UserRoles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +24,7 @@ class AdminMiddleware
 
         if (
             !$user ||
-            !$user->isAdmin()
+            $user->role !== UserRoles::ADMIN
         ) {
             abort(404);
         }

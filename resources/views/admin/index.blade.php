@@ -7,7 +7,9 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    @include('message')
+    <p>Bienvenido al panel de administración de La Dulcería!</p>
+    <img src="{{ e(asset(config('adminlte.logo_img', 'vendor/adminlte/dist/img/AdminLTELogo.png'))) }}" width="50%"/>
 @stop
 
 @section('css')
